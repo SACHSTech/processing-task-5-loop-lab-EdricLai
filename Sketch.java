@@ -37,6 +37,7 @@ public class Sketch extends PApplet {
   public void setup() {
     background(45, 150, 207);
     draw_section_outlines();
+    noStroke();
     draw_section1();
     draw_section2();
     draw_section3();
@@ -46,7 +47,7 @@ public class Sketch extends PApplet {
     draw_section7();
     draw_section8();
   }
-
+  
   /**
    * draw the outlines for all sections
    */
@@ -79,7 +80,6 @@ public class Sketch extends PApplet {
     for(fltPosX = fltSpaceX; fltPosX <= fltQuadWidth - fltSpaceX; fltPosX += fltSpaceX){
       for(fltPosY = fltSpaceY; fltPosY <= fltQuadHeight - fltSpaceY; fltPosY += fltSpaceY){
         fill(255);
-        noStroke();
         rect(fltPosX, fltPosY, fltSquare, fltSquare);
       }
     }
@@ -106,18 +106,35 @@ public class Sketch extends PApplet {
         else {
           fill(0);
         }
-        noStroke();
         rect(fltPosX, fltPosY, fltSquare, fltSquare);
       }
     }
   }
-  
+
   /**
-   * Use the modulus operator and an if/else statement to select the color.
-   * Don't use multiple 'if' statements.
+   * draws quadrant 3
    */
   public void draw_section3(){
+    // translates system coords to q3
+    translate(-(fltQuadWidth * 1), -(fltQuadHeight));
+    translate(fltQuadWidth * 2, fltQuadHeight);
 
+    // initializes variables
+    intTempCount = 0;
+
+    // draws pattern
+    for(fltPosY = fltSpaceY; fltPosY <= fltQuadHeight - fltSpaceY; fltPosY += fltSpaceY){
+      intTempCount += 1;
+      for(fltPosX = fltSpaceX; fltPosX <= fltQuadWidth - fltSpaceX; fltPosX += fltSpaceX){
+        if (intTempCount % 2 == 0) {
+          fill(255);
+        }
+        else {
+          fill(0);
+        }
+        rect(fltPosX, fltPosY, fltSquare, fltSquare);
+      }
+    }
   }
 
   /**
