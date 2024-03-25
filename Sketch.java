@@ -20,6 +20,7 @@ public class Sketch extends PApplet {
   float fltPosX;
   float fltPosY;
   int intTempCount;
+  int intTempCount2;
   
   /**
    * called once
@@ -47,7 +48,7 @@ public class Sketch extends PApplet {
     draw_section7();
     draw_section8();
   }
-  
+
   /**
    * draw the outlines for all sections
    */
@@ -110,7 +111,7 @@ public class Sketch extends PApplet {
       }
     }
   }
-
+  
   /**
    * draws quadrant 3
    */
@@ -138,12 +139,33 @@ public class Sketch extends PApplet {
   }
 
   /**
-   * Use the modulus operator and just one 'if' statement to select the color.
+   * draws quadrant 4
    */
   public void draw_section4(){
+    // translates system coords to q4
+    translate(-(fltQuadWidth * 2), -(fltQuadHeight));
+    translate(fltQuadWidth * 3, fltQuadHeight);
 
+    // initializes variables
+    intTempCount = 0;
+    intTempCount2 = 0;
+    
+    // draws pattern
+    for(fltPosX = fltSpaceX; fltPosX <= fltQuadWidth - fltSpaceX; fltPosX += fltSpaceX){
+      intTempCount += 1;
+      for(fltPosY = fltSpaceY; fltPosY <= fltQuadHeight - fltSpaceY; fltPosY += fltSpaceY){
+        intTempCount2 += 1;
+        if (intTempCount % 2 == 0 || intTempCount2 % 2 == 0) {
+          fill(255);
+        }
+        else {
+          fill(0);
+        }
+        rect(fltPosX, fltPosY, fltSquare, fltSquare);
+      }
+    }
   }
-
+  
   /**
    * Do NOT use 'if' statements to complete 5-8. Manipulate the loops instead
    */
