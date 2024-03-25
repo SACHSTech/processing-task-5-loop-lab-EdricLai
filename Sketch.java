@@ -228,11 +228,25 @@ public class Sketch extends PApplet {
       }
     }
   }
-  
+
   /**
    * draws quadrant 8
   */
   public void draw_section8(){
+    // translates system coords to q8
+    translate(-(fltQuadWidth * 3), -(0));
+    translate(fltQuadWidth * 3, 0);
 
+    // initializes variables
+    fltTempCount = fltSquare;
+    
+    // draws pattern
+    for(fltPosX = fltSpaceX; fltPosX <= fltQuadWidth - fltSpaceX; fltPosX += fltSpaceX){
+      fltTempCount += fltSpaceY;
+      for(fltPosY = fltSpaceY; fltPosY <= fltTempCount; fltPosY += fltSpaceY){
+        fill(255);
+        rect(fltPosX, fltPosY, fltSquare, fltSquare);
+      }
+    }
   }
 }
