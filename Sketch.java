@@ -1,92 +1,89 @@
+/**
+ * Description: draws patterns using nested loops
+ * @author: EdricLai
+*/
+
 import processing.core.PApplet;
 
-public class Sketch extends PApplet {
-	
-	
+public class Sketch extends PApplet { 
+  /*
+   * called once
+   * global variables
+   */
+  int intWidth = 1200;
+  int intHeight = 600;
+  float fltQuadWidth = intHeight / 2;
+  float fltQuadHeight = intHeight / 2;
+  float fltSquare = fltQuadHeight / 60;
+  float fltPosX;
+  float fltPosY;
+  float fltSpaceX;
+  float fltSpaceY;
+
   /**
-   * Called once at the beginning of execution, put your size all in this method
+   * called once
+   * initial settings
    */
   public void settings() {
-	// put your size call here
-    size(1200, 600);
+    // screen size
+    size(intWidth, intHeight);
   }
 
   /** 
-   * Called once at the beginning of execution.  Add initial set up
-   * values here i.e background, stroke, fill etc.
+   * called once
+   * initial setup values
    */
   public void setup() {
     background(45, 150, 207);
-  }
-
-  /**
-   * Called repeatedly, anything drawn to the screen goes here
-   */
-  public void draw() {
-	  
-	// sample code, delete this stuff
-    /*
-    stroke(128);
-    line(150, 25, 270, 350);  
-
-    stroke(255);
-    line(50, 125, 70, 50);  
-*/
     draw_section_outlines();
     draw_section1();
     draw_section2();
     draw_section3();
     draw_section4();
-	  
     draw_section5();
     draw_section6();
     draw_section7();
     draw_section8();
-
-    
   }
 
-
   /**
-   * Draw the outlines for all sections
+   * draw the outlines for all sections
    */
   public void draw_section_outlines(){
+    // display attributes
     stroke(0);
     noFill();
-
-    // draw bottom row boxes
-    rect(0,300, 300, 300);
-    rect(300, 300, 300, 300);
-    rect(600, 300, 300, 300);
-    rect(900, 300, 300, 300);
-
-    // draw top row boxes
-    rect(0,0, 300, 300);
-    rect(300, 0, 300, 300);
-    rect(600, 0, 300, 300);
-    rect(900, 0, 300, 300);
+    // draws bottom row boxes
+    rect(fltQuadWidth * 0, fltQuadHeight, fltQuadWidth, fltQuadHeight);
+    rect(fltQuadWidth * 1, fltQuadHeight, fltQuadWidth, fltQuadHeight);
+    rect(fltQuadWidth * 2, fltQuadHeight, fltQuadWidth, fltQuadHeight);
+    rect(fltQuadWidth * 3, fltQuadHeight, fltQuadWidth, fltQuadHeight);
+    // draws top row boxes
+    rect(fltQuadWidth * 0, 0, fltQuadWidth, fltQuadHeight);
+    rect(fltQuadWidth * 1, 0, fltQuadWidth, fltQuadHeight);
+    rect(fltQuadWidth * 2, 0, fltQuadWidth, fltQuadHeight);
+    rect(fltQuadWidth * 3, 0, fltQuadWidth, fltQuadHeight);
   }
-  
+
   /**
-   * draws the bottom left section
+   * draws quadrant 1
    */
   public void draw_section1(){
-    int intX = 0;
-    int intY = 0;
-
-    for(int intRow = 0; intRow < 30; intRow++){
-      for(int intColumn = 0; intColumn < 30; intColumn++){
-        intX = 3 + 0;  //Instead of zero, calculate the proper intX location using 'intRow'
-        intY = 300 + 3 + 0; //Instead of zero, calculate the proper intY location using 'intColumn'
-
+    // translates system coords at q1
+    translate(0, fltQuadHeight);
+    // initializes variables
+    fltSpaceX = fltQuadWidth / 30;
+    fltSpaceY = fltQuadHeight / 30;
+    // draws pattern
+    for(fltPosX = fltSpaceX; fltPosX <= fltQuadWidth - fltSpaceX; fltPosX += fltSpaceX){
+      for(fltPosY = fltSpaceY; fltPosY <= fltQuadHeight - fltSpaceY; fltPosY += fltSpaceY){
         fill(255);
         noStroke();
-        rect(intX, intY, 5, 5);
-
+        rect(fltPosX, fltPosY, fltSquare, fltSquare);
       }
     }
   }
-
+  
   /**
    * Use the modulus operator and an if statement to select the color
    * Don't loop from 30 to 60 to shift everything over, just add 300 to x.
@@ -124,14 +121,8 @@ public class Sketch extends PApplet {
   public void draw_section7(){
 
   }
-  
+
   public void draw_section8(){
 
   }
-
-
-
-
-
-
 }
