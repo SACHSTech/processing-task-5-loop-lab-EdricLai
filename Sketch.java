@@ -19,8 +19,8 @@ public class Sketch extends PApplet {
   float fltSpaceY = fltQuadHeight / 30;
   float fltPosX;
   float fltPosY;
-  int intTempCount;
-  int intTempCount2;
+  float fltTempCount;
+  float fltTempCount2;
   
   /**
    * called once
@@ -95,13 +95,13 @@ public class Sketch extends PApplet {
     translate(fltQuadWidth * 1, fltQuadHeight);
 
     // initializes variables
-    intTempCount = 0;
+    fltTempCount = 0;
 
     // draws pattern
     for(fltPosX = fltSpaceX; fltPosX <= fltQuadWidth - fltSpaceX; fltPosX += fltSpaceX){
-      intTempCount += 1;
+      fltTempCount += 1;
       for(fltPosY = fltSpaceY; fltPosY <= fltQuadHeight - fltSpaceY; fltPosY += fltSpaceY){
-        if (intTempCount % 2 == 0) {
+        if (fltTempCount % 2 == 0) {
           fill(255);
         }
         else {
@@ -121,13 +121,13 @@ public class Sketch extends PApplet {
     translate(fltQuadWidth * 2, fltQuadHeight);
 
     // initializes variables
-    intTempCount = 0;
+    fltTempCount = 0;
 
     // draws pattern
     for(fltPosY = fltSpaceY; fltPosY <= fltQuadHeight - fltSpaceY; fltPosY += fltSpaceY){
-      intTempCount += 1;
+      fltTempCount += 1;
       for(fltPosX = fltSpaceX; fltPosX <= fltQuadWidth - fltSpaceX; fltPosX += fltSpaceX){
-        if (intTempCount % 2 == 0) {
+        if (fltTempCount % 2 == 0) {
           fill(255);
         }
         else {
@@ -147,15 +147,15 @@ public class Sketch extends PApplet {
     translate(fltQuadWidth * 3, fltQuadHeight);
 
     // initializes variables
-    intTempCount = 0;
-    intTempCount2 = 0;
-    
+    fltTempCount = 0;
+    fltTempCount2 = 0;
+
     // draws pattern
     for(fltPosX = fltSpaceX; fltPosX <= fltQuadWidth - fltSpaceX; fltPosX += fltSpaceX){
-      intTempCount += 1;
+      fltTempCount += 1;
       for(fltPosY = fltSpaceY; fltPosY <= fltQuadHeight - fltSpaceY; fltPosY += fltSpaceY){
-        intTempCount2 += 1;
-        if (intTempCount % 2 == 0 || intTempCount2 % 2 == 0) {
+        fltTempCount2 += 1;
+        if (fltTempCount % 2 == 0 || fltTempCount2 % 2 == 0) {
           fill(255);
         }
         else {
@@ -167,12 +167,26 @@ public class Sketch extends PApplet {
   }
   
   /**
-   * Do NOT use 'if' statements to complete 5-8. Manipulate the loops instead
+   * draws quadrant 5
    */
   public void draw_section5(){
+    // translates system coords to q5
+    translate(-(fltQuadWidth * 3), -(fltQuadHeight));
+    translate(fltQuadWidth * 0, fltQuadHeight);
 
+    // initializes variables
+    fltTempCount = -fltSquare;
+    
+    // draws pattern
+    for(fltPosX = fltSpaceX; fltPosX <= fltQuadWidth - fltSpaceX; fltPosX += fltSpaceX){
+      fltTempCount -= fltSpaceY;
+      for(fltPosY = -fltSpaceY; fltPosY >= fltTempCount; fltPosY -= fltSpaceY){
+        fill(255);
+        rect(fltPosX, fltPosY, fltSquare, fltSquare);
+      }
+    }
   }
-
+  
   public void draw_section6(){
 
   }
