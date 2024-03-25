@@ -15,11 +15,12 @@ public class Sketch extends PApplet {
   float fltQuadWidth = intHeight / 2;
   float fltQuadHeight = intHeight / 2;
   float fltSquare = fltQuadHeight / 60;
+  float fltSpaceX = fltQuadWidth / 30;
+  float fltSpaceY = fltQuadHeight / 30;
   float fltPosX;
   float fltPosY;
-  float fltSpaceX;
-  float fltSpaceY;
-
+  int intTempCount;
+  
   /**
    * called once
    * initial settings
@@ -31,7 +32,7 @@ public class Sketch extends PApplet {
 
   /** 
    * called once
-   * initial setup values
+   * initial setup
    */
   public void setup() {
     background(45, 150, 207);
@@ -53,11 +54,13 @@ public class Sketch extends PApplet {
     // display attributes
     stroke(0);
     noFill();
+
     // draws bottom row boxes
     rect(fltQuadWidth * 0, fltQuadHeight, fltQuadWidth, fltQuadHeight);
     rect(fltQuadWidth * 1, fltQuadHeight, fltQuadWidth, fltQuadHeight);
     rect(fltQuadWidth * 2, fltQuadHeight, fltQuadWidth, fltQuadHeight);
     rect(fltQuadWidth * 3, fltQuadHeight, fltQuadWidth, fltQuadHeight);
+
     // draws top row boxes
     rect(fltQuadWidth * 0, 0, fltQuadWidth, fltQuadHeight);
     rect(fltQuadWidth * 1, 0, fltQuadWidth, fltQuadHeight);
@@ -69,11 +72,9 @@ public class Sketch extends PApplet {
    * draws quadrant 1
    */
   public void draw_section1(){
-    // translates system coords at q1
-    translate(0, fltQuadHeight);
-    // initializes variables
-    fltSpaceX = fltQuadWidth / 30;
-    fltSpaceY = fltQuadHeight / 30;
+    // translates system coords to q1
+    translate(fltQuadWidth * 0, fltQuadHeight);
+
     // draws pattern
     for(fltPosX = fltSpaceX; fltPosX <= fltQuadWidth - fltSpaceX; fltPosX += fltSpaceX){
       for(fltPosY = fltSpaceY; fltPosY <= fltQuadHeight - fltSpaceY; fltPosY += fltSpaceY){
@@ -83,15 +84,34 @@ public class Sketch extends PApplet {
       }
     }
   }
-  
+
   /**
-   * Use the modulus operator and an if statement to select the color
-   * Don't loop from 30 to 60 to shift everything over, just add 300 to x.
+   * draws quadrant 2
    */
   public void draw_section2(){
+    // translates system coords to q2
+    translate(-(fltQuadWidth * 0), -(fltQuadHeight));
+    translate(fltQuadWidth * 1, fltQuadHeight);
 
+    // initializes variables
+    intTempCount = 0;
+
+    // draws pattern
+    for(fltPosX = fltSpaceX; fltPosX <= fltQuadWidth - fltSpaceX; fltPosX += fltSpaceX){
+      intTempCount += 1;
+      for(fltPosY = fltSpaceY; fltPosY <= fltQuadHeight - fltSpaceY; fltPosY += fltSpaceY){
+        if (intTempCount % 2 == 0) {
+          fill(255);
+        }
+        else {
+          fill(0);
+        }
+        noStroke();
+        rect(fltPosX, fltPosY, fltSquare, fltSquare);
+      }
+    }
   }
-
+  
   /**
    * Use the modulus operator and an if/else statement to select the color.
    * Don't use multiple 'if' statements.
