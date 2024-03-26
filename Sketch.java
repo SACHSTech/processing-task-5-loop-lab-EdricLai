@@ -1,137 +1,260 @@
+/**
+ * Description: draws patterns using nested loops
+ * @author: EdricLai
+*/
+
 import processing.core.PApplet;
 
-public class Sketch extends PApplet {
-	
-	
+public class Sketch extends PApplet { 
+  /*
+   * called once
+   * global variables
+   */
+  int intWidth = 1200;
+  int intHeight = intWidth / 2;
+  float fltQuadWidth = intHeight / 2;
+  float fltQuadHeight = intHeight / 2;
+  float fltSquare = fltQuadHeight / 60;
+  float fltSpaceX = fltQuadWidth / 30;
+  float fltSpaceY = fltQuadHeight / 30;
+  float fltPosX;
+  float fltPosY;
+  float fltTempCount;
+  float fltTempCount2;
+
   /**
-   * Called once at the beginning of execution, put your size all in this method
+   * called once
+   * initial settings
    */
   public void settings() {
-	// put your size call here
-    size(1200, 600);
+    // screen size
+    size(intWidth, intHeight);
   }
 
   /** 
-   * Called once at the beginning of execution.  Add initial set up
-   * values here i.e background, stroke, fill etc.
+   * called once
+   * initial setup
    */
   public void setup() {
     background(45, 150, 207);
-  }
-
-  /**
-   * Called repeatedly, anything drawn to the screen goes here
-   */
-  public void draw() {
-	  
-	// sample code, delete this stuff
-    /*
-    stroke(128);
-    line(150, 25, 270, 350);  
-
-    stroke(255);
-    line(50, 125, 70, 50);  
-*/
     draw_section_outlines();
+    noStroke();
     draw_section1();
     draw_section2();
     draw_section3();
     draw_section4();
-	  
     draw_section5();
     draw_section6();
     draw_section7();
     draw_section8();
-
-    
   }
 
-
   /**
-   * Draw the outlines for all sections
+   * draw the outlines for all sections
    */
   public void draw_section_outlines(){
+    // display attributes
     stroke(0);
     noFill();
 
-    // draw bottom row boxes
-    rect(0,300, 300, 300);
-    rect(300, 300, 300, 300);
-    rect(600, 300, 300, 300);
-    rect(900, 300, 300, 300);
+    // draws bottom row boxes
+    rect(fltQuadWidth * 0, fltQuadHeight, fltQuadWidth, fltQuadHeight);
+    rect(fltQuadWidth * 1, fltQuadHeight, fltQuadWidth, fltQuadHeight);
+    rect(fltQuadWidth * 2, fltQuadHeight, fltQuadWidth, fltQuadHeight);
+    rect(fltQuadWidth * 3, fltQuadHeight, fltQuadWidth, fltQuadHeight);
 
-    // draw top row boxes
-    rect(0,0, 300, 300);
-    rect(300, 0, 300, 300);
-    rect(600, 0, 300, 300);
-    rect(900, 0, 300, 300);
+    // draws top row boxes
+    rect(fltQuadWidth * 0, 0, fltQuadWidth, fltQuadHeight);
+    rect(fltQuadWidth * 1, 0, fltQuadWidth, fltQuadHeight);
+    rect(fltQuadWidth * 2, 0, fltQuadWidth, fltQuadHeight);
+    rect(fltQuadWidth * 3, 0, fltQuadWidth, fltQuadHeight);
   }
-  
+
   /**
-   * draws the bottom left section
+   * draws quadrant 1
+   * full square
    */
   public void draw_section1(){
-    int intX = 0;
-    int intY = 0;
+    // translates system coords to q1
+    translate(fltQuadWidth * 0, fltQuadHeight);
 
-    for(int intRow = 0; intRow < 30; intRow++){
-      for(int intColumn = 0; intColumn < 30; intColumn++){
-        intX = 3 + 0;  //Instead of zero, calculate the proper intX location using 'intRow'
-        intY = 300 + 3 + 0; //Instead of zero, calculate the proper intY location using 'intColumn'
-
+    // draws pattern
+    for(fltPosX = fltSpaceX; fltPosX <= fltQuadWidth - fltSpaceX; fltPosX += fltSpaceX){
+      for(fltPosY = fltSpaceY; fltPosY <= fltQuadHeight - fltSpaceY; fltPosY += fltSpaceY){
         fill(255);
-        noStroke();
-        rect(intX, intY, 5, 5);
-
+        rect(fltPosX, fltPosY, fltSquare, fltSquare);
       }
     }
   }
 
   /**
-   * Use the modulus operator and an if statement to select the color
-   * Don't loop from 30 to 60 to shift everything over, just add 300 to x.
+   * draws quadrant 2
+   * full square with black columns
    */
   public void draw_section2(){
+    // translates system coords to q2
+    translate(-(fltQuadWidth * 0), -(fltQuadHeight));
+    translate(fltQuadWidth * 1, fltQuadHeight);
 
-  }
+    // initializes variables
+    fltTempCount = 0;
 
-  /**
-   * Use the modulus operator and an if/else statement to select the color.
-   * Don't use multiple 'if' statements.
-   */
-  public void draw_section3(){
-
-  }
-
-  /**
-   * Use the modulus operator and just one 'if' statement to select the color.
-   */
-  public void draw_section4(){
-
-  }
-
-  /**
-   * Do NOT use 'if' statements to complete 5-8. Manipulate the loops instead
-   */
-  public void draw_section5(){
-
-  }
-
-  public void draw_section6(){
-
-  }
-
-  public void draw_section7(){
-
+    // draws pattern
+    for(fltPosX = fltSpaceX; fltPosX <= fltQuadWidth - fltSpaceX; fltPosX += fltSpaceX){
+      fltTempCount += 1;
+      for(fltPosY = fltSpaceY; fltPosY <= fltQuadHeight - fltSpaceY; fltPosY += fltSpaceY){
+        if (fltTempCount % 2 == 0) {
+          fill(255);
+        }
+        else {
+          fill(0);
+        }
+        rect(fltPosX, fltPosY, fltSquare, fltSquare);
+      }
+    }
   }
   
-  public void draw_section8(){
+  /**
+   * draws quadrant 3
+   * full square with black rows
+   */
+  public void draw_section3(){
+    // translates system coords to q3
+    translate(-(fltQuadWidth * 1), -(fltQuadHeight));
+    translate(fltQuadWidth * 2, fltQuadHeight);
 
+    // initializes variables
+    fltTempCount = 0;
+
+    // draws pattern
+    for(fltPosY = fltSpaceY; fltPosY <= fltQuadHeight - fltSpaceY; fltPosY += fltSpaceY){
+      fltTempCount += 1;
+      for(fltPosX = fltSpaceX; fltPosX <= fltQuadWidth - fltSpaceX; fltPosX += fltSpaceX){
+        if (fltTempCount % 2 == 0) {
+          fill(255);
+        }
+        else {
+          fill(0);
+        }
+        rect(fltPosX, fltPosY, fltSquare, fltSquare);
+      }
+    }
   }
 
+  /**
+   * draws quadrant 4
+   * full square with black columns and rows
+   */
+  public void draw_section4(){
+    // translates system coords to q4
+    translate(-(fltQuadWidth * 2), -(fltQuadHeight));
+    translate(fltQuadWidth * 3, fltQuadHeight);
 
+    // initializes variables
+    fltTempCount = 0;
+    fltTempCount2 = 0;
 
+    // draws pattern
+    for(fltPosX = fltSpaceX; fltPosX <= fltQuadWidth - fltSpaceX; fltPosX += fltSpaceX){
+      fltTempCount += 1;
+      for(fltPosY = fltSpaceY; fltPosY <= fltQuadHeight - fltSpaceY; fltPosY += fltSpaceY){
+        fltTempCount2 += 1;
+        if (fltTempCount % 2 == 0 || fltTempCount2 % 2 == 0) {
+          fill(255);
+        }
+        else {
+          fill(0);
+        }
+        rect(fltPosX, fltPosY, fltSquare, fltSquare);
+      }
+    }
+  }
+  
+  /**
+   * draws quadrant 5
+   * upright white square facing right
+   */
+  public void draw_section5(){
+    // translates system coords to q5
+    translate(-(fltQuadWidth * 3), -(fltQuadHeight));
+    translate(fltQuadWidth * 0, fltQuadHeight);
 
+    // initializes variables
+    fltTempCount = -fltSquare;
+    
+    // draws pattern
+    for(fltPosX = fltSpaceX; fltPosX <= fltQuadWidth - fltSpaceX; fltPosX += fltSpaceX){
+      fltTempCount -= fltSpaceY;
+      for(fltPosY = -fltSpaceY; fltPosY >= fltTempCount; fltPosY -= fltSpaceY){
+        fill(255);
+        rect(fltPosX, fltPosY, fltSquare, fltSquare);
+      }
+    }
+  }
+  
+  /**
+   * draws quadrant 6
+   * upright white square facing left
+   */
+  public void draw_section6(){
+    // translates system coords to q6
+    translate(-(fltQuadWidth * 0), -(fltQuadHeight));
+    translate(fltQuadWidth * 2, fltQuadHeight);
 
+    // initializes variables
+    fltTempCount = -fltSquare;
 
+    // draws pattern
+    for(fltPosX = -fltSpaceX; fltPosX >= -fltQuadWidth + fltSpaceX; fltPosX -= fltSpaceX){
+      fltTempCount -= fltSpaceY;
+      for(fltPosY = -fltSpaceY; fltPosY >= fltTempCount; fltPosY -= fltSpaceY){
+        fill(255);
+        rect(fltPosX, fltPosY, fltSquare, fltSquare);
+      }
+    }
+  }
+
+  /**
+   * draws quadrant 7
+   * flipped white square facing left
+  */
+  public void draw_section7(){
+    // translates system coords to q7
+    translate(-(fltQuadWidth * 2), -(fltQuadHeight));
+    translate(fltQuadWidth * 3, 0);
+
+    // initializes variables
+    fltTempCount = fltSquare;
+
+    // draws pattern
+    for(fltPosX = -fltSpaceX; fltPosX >= -fltQuadWidth + fltSpaceX; fltPosX -= fltSpaceX){
+      fltTempCount += fltSpaceY;
+      for(fltPosY = fltSpaceY; fltPosY <= fltTempCount; fltPosY += fltSpaceY){
+        fill(255);
+        rect(fltPosX, fltPosY, fltSquare, fltSquare);
+      }
+    }
+  }
+
+  /**
+   * draws quadrant 8
+   * flipped white square facing right
+  */
+  public void draw_section8(){
+    // translates system coords to q8
+    translate(-(fltQuadWidth * 3), -(0));
+    translate(fltQuadWidth * 3, 0);
+
+    // initializes variables
+    fltTempCount = fltSquare;
+
+    // draws pattern
+    for(fltPosX = fltSpaceX; fltPosX <= fltQuadWidth - fltSpaceX; fltPosX += fltSpaceX){
+      fltTempCount += fltSpaceY;
+      for(fltPosY = fltSpaceY; fltPosY <= fltTempCount; fltPosY += fltSpaceY){
+        fill(255);
+        rect(fltPosX, fltPosY, fltSquare, fltSquare);
+      }
+    }
+  }
 }
