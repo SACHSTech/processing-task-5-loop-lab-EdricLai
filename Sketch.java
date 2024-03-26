@@ -11,7 +11,7 @@ public class Sketch extends PApplet {
    * global variables
    */
   int intWidth = 1200;
-  int intHeight = 600;
+  int intHeight = intWidth / 2;
   float fltQuadWidth = intHeight / 2;
   float fltQuadHeight = intHeight / 2;
   float fltSquare = fltQuadHeight / 60;
@@ -21,7 +21,7 @@ public class Sketch extends PApplet {
   float fltPosY;
   float fltTempCount;
   float fltTempCount2;
-  
+
   /**
    * called once
    * initial settings
@@ -72,6 +72,7 @@ public class Sketch extends PApplet {
 
   /**
    * draws quadrant 1
+   * full square
    */
   public void draw_section1(){
     // translates system coords to q1
@@ -88,6 +89,7 @@ public class Sketch extends PApplet {
 
   /**
    * draws quadrant 2
+   * full square with black columns
    */
   public void draw_section2(){
     // translates system coords to q2
@@ -114,6 +116,7 @@ public class Sketch extends PApplet {
   
   /**
    * draws quadrant 3
+   * full square with black rows
    */
   public void draw_section3(){
     // translates system coords to q3
@@ -140,6 +143,7 @@ public class Sketch extends PApplet {
 
   /**
    * draws quadrant 4
+   * full square with black columns and rows
    */
   public void draw_section4(){
     // translates system coords to q4
@@ -168,6 +172,7 @@ public class Sketch extends PApplet {
   
   /**
    * draws quadrant 5
+   * upright white square facing right
    */
   public void draw_section5(){
     // translates system coords to q5
@@ -189,6 +194,7 @@ public class Sketch extends PApplet {
   
   /**
    * draws quadrant 6
+   * upright white square facing left
    */
   public void draw_section6(){
     // translates system coords to q6
@@ -197,7 +203,7 @@ public class Sketch extends PApplet {
 
     // initializes variables
     fltTempCount = -fltSquare;
-    
+
     // draws pattern
     for(fltPosX = -fltSpaceX; fltPosX >= -fltQuadWidth + fltSpaceX; fltPosX -= fltSpaceX){
       fltTempCount -= fltSpaceY;
@@ -210,6 +216,7 @@ public class Sketch extends PApplet {
 
   /**
    * draws quadrant 7
+   * flipped white square facing left
   */
   public void draw_section7(){
     // translates system coords to q7
@@ -218,7 +225,7 @@ public class Sketch extends PApplet {
 
     // initializes variables
     fltTempCount = fltSquare;
-    
+
     // draws pattern
     for(fltPosX = -fltSpaceX; fltPosX >= -fltQuadWidth + fltSpaceX; fltPosX -= fltSpaceX){
       fltTempCount += fltSpaceY;
@@ -231,6 +238,7 @@ public class Sketch extends PApplet {
 
   /**
    * draws quadrant 8
+   * flipped white square facing right
   */
   public void draw_section8(){
     // translates system coords to q8
@@ -239,7 +247,7 @@ public class Sketch extends PApplet {
 
     // initializes variables
     fltTempCount = fltSquare;
-    
+
     // draws pattern
     for(fltPosX = fltSpaceX; fltPosX <= fltQuadWidth - fltSpaceX; fltPosX += fltSpaceX){
       fltTempCount += fltSpaceY;
